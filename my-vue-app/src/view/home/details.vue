@@ -16,8 +16,8 @@ export default {
   created() {
     this.id = this.$route.query.id;
     this.type = this.$route.query.type;
-    if (window.sessionStorage.getItem('comName')) {
-      this.uid = window.sessionStorage.getItem('comName')
+    if (window.sessionStorage.getItem('info')) {
+      this.uid = JSON.parse(sessionStorage.getItem('info')).username
     }
   },
   mounted() {
@@ -46,10 +46,10 @@ export default {
     <div class="title"><span @click="this.$router.push('/home')" class="home">首页</span> > <span>详情</span></div>
     <div class="details_content" v-for="item in search" :key="id">
       <div class="info">
-      <div class="left" v-if="type == 'attractions' || type == 'hotel' || type == 'restaurant' || type == 'food'">
-        <a-image height="300px" :src="item.image" style="margin:10px;" :title="item.area" fit="fill" />
-      </div>
-     
+        <div class="left" v-if="type == 'attractions' || type == 'hotel' || type == 'restaurant' || type == 'food'">
+          <a-image height="300px" :src="item.image" style="margin:10px;" :title="item.area" fit="fill" />
+        </div>
+
         <div class="right" v-if="type == 'attractions'">
           <div class="right_wenzi">地点：{{ item.title == undefined ? '暂无数据' : item.title }}</div>
           <div class="right_wenzi">热度：{{ item.product == undefined ? '暂无数据' : item.product }}</div>
@@ -94,7 +94,7 @@ export default {
       </div>
       <div class="comments">
         <a>评论：</a>
-        <comments :uid="this.uid" :type="this.type" :id = "this.id"/>
+        <comments :uid="this.uid" :type="this.type" :id="this.id" />
       </div>
     </div>
   </div>
@@ -128,7 +128,8 @@ export default {
     padding: 20px;
     border-radius: 5px;
     background-color: rgba(247, 247, 247, 1);
-    .info{
+
+    .info {
       display: flex;
       flex-direction: row;
     }
@@ -147,6 +148,7 @@ export default {
 
     .right {
       margin: 20px;
+
       .right_wenzi {
         height: 30px;
         font-size: 18px;

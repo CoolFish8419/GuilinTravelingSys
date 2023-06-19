@@ -2,33 +2,18 @@
     <div>
         <ul>
             <ul style="margin:10px 5px" v-for="comment in comments" :key="comment.id">
-                <strong >{{ comment.entityId }}</strong>: {{ comment.content }}
+                <strong>{{ this.uid }}</strong>: {{ comment.content }}
             </ul>
         </ul>
 
         <form @submit.prevent="submitComment">
-            <el-input
-                style="margin-top: 20px" 
-                v-model="entityId" 
-                maxlength="10" 
-                placeholder="Please input your name" 
-                show-word-limit type="text" 
-                required
-            />
-            
-            <div style="margin: 20px 0" />
 
-            <el-input v-model="commentText" 
-             maxlength="30" 
-             placeholder="Please input your comment" 
-             show-word-limit 
-             type="textarea" 
-            required/>
+            <el-input v-model="commentText" maxlength="30" placeholder="Please input your comment" show-word-limit
+                type="textarea" required />
 
             <button type="submit" style="margin: 20px 0">提交评论</button>
         </form>
     </div>
-
 </template>
   
 <script>
@@ -51,53 +36,51 @@ export default {
     },
     data() {
         return {
-            comments: [
-                {
-                    entityId:"123",
-                    content:'asdasd'
-                },
-                {
-                    entityId:"123",
-                    content:'asdasd'
-                },
-            ],
-            entityId: '',
+            comments: [],
             commentText: ''
         };
     },
-    created() {
-        // this.fetchComments
+    mounted() {
+        this.fetchComments();
+        console.log(this.uid)
     },
     methods: {
         submitComment() {
-            if (this.entityId && this.commentText) {
+            if (this.commentText && this.uid) {
                 const newComment = {
-                    id: this.id,
                     type: this.type,
-                    entityId: this.entityId,
+                    pid: this.id,
+                    uid: this.uid,
                     content: this.commentText
                 };
 
-                axios
-                    .post(apiUrl, newComment)
+                this.$http.post('/comments/add', newComment)
                     .then(response => {
                         this.comments.push(newComment);
-                        this.entityId = '';
                         this.commentText = '';
+                        console.log(newComment)
                     })
                     .catch(error => {
                         console.error('评论提交失败:', error);
                     });
 
+
+            }
+            else {
+                alert('评论前请登录');
+                setTimeout(() => {
+                    this.$router.push('/login')
+                }, 1000)
             }
         },
         fetchComments() {
-            id = this.id;
-            type = this.type;
+            let pid = this.id;
+            let type = this.type;
             // 发起 GET 请求到后端接口
-            axios.get(`/api/comments/${id}/${type}`)
+            this.$http.get(`/comments/${pid}/${type}`)
                 .then(response => {
-                    this.comments = response.data;
+                    if (response.config.data) this.comments = response.config.data;
+                    console.log(response)
                 })
                 .catch(error => {
                     console.error('获取评论内容失败:', error);

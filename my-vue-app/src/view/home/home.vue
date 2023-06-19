@@ -3,11 +3,9 @@
    data() {
     return {
       images:[
-       'http://10.38.181.12:3020/1.jpeg',
-       'http://10.38.181.12:3020/2.jpeg',
-       'http://10.38.181.12:3020/3.jpeg',
-       'http://10.38.181.12:3020/4.jpeg',
-       'http://10.38.181.12:3020/5.jpeg',
+       {id:1,src:'https://tse4-mm.cn.bing.net/th/id/OIP-C.GEePZvcfr3a5X0Xia1rSjwHaE5?pid=ImgDet&rs=1'},
+       {id:2,src:'https://tse4-mm.cn.bing.net/th/id/OIP-C.w7pc6PIXMCmOQrcPqCSrEQHaE8?pid=ImgDet&rs=1'},
+       {id:3,src:'https://img.zcool.cn/community/0104d155fdc4416ac7251df855d682.jpg@3000w_1l_0o_100sh.jpg'},
       ],
       page:5,
       attractions:'',
@@ -102,9 +100,9 @@
    show-arrow="never"
    indicator-type="dot"
    >
-    <a-carousel-item v-for="image in images" :style="{width:'60%'}">
+    <a-carousel-item v-for="image in images" :key="image.id" :style="{width:'60%'}">
      <img
-       :src="image"
+       :src="image.src"
        :style="{
          width: '100%',
        }"
