@@ -42,7 +42,6 @@ export default {
     },
     mounted() {
         this.fetchComments();
-        console.log(this.uid)
     },
     methods: {
         submitComment() {
@@ -56,15 +55,12 @@ export default {
 
                 this.$http.post('/comments/add', newComment)
                     .then(response => {
-                        this.comments.push(newComment);
                         this.commentText = '';
-                        console.log(newComment)
+                        this.fetchComments();
                     })
                     .catch(error => {
                         console.error('评论提交失败:', error);
                     });
-
-
             }
             else {
                 alert('评论前请登录');
@@ -73,14 +69,19 @@ export default {
                 }, 1000)
             }
         },
+
         fetchComments() {
             let pid = this.id;
             let type = this.type;
             // 发起 GET 请求到后端接口
             this.$http.get(`/comments/${pid}/${type}`)
                 .then(response => {
-                    if (response.config.data) this.comments = response.config.data;
-                    console.log(response)
+                    if (response.data)
+                        this.comments = response.data.reduce(function (obj, item) {
+                            obj[item.id] = item;
+                            return obj;
+                        }, {});
+                    console.log(this.comments)
                 })
                 .catch(error => {
                     console.error('获取评论内容失败:', error);

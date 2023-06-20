@@ -139,7 +139,6 @@
               <input type="password" v-model="password" ref="input" @focus="foucsInput" @blur="blurInput"  >
               <span data-placeholder="Password"></span>
           </div>
-          <a href="#">忘记密码？</a>
           <button @click="Login" type="button">登录</button>
       </form>
   </div>
