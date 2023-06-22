@@ -2,7 +2,7 @@
     <div>
         <ul>
             <ul style="margin:10px 5px" v-for="comment in comments" :key="comment.id">
-                <strong>{{ this.uid }}</strong>: {{ comment.content }}
+                <strong>{{ comment.uid }}</strong>: {{ comment.content }}
             </ul>
         </ul>
 
