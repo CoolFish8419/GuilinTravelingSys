@@ -128,8 +128,8 @@
    <div class="right" ref="right">
     <el-form ref="GoodsFormRef" :model="GoodsForm" :rules="GoodsFormRules" label-width="0px">
       <el-form-item prop="ma_nickname">
-        <span>用户名：</span>
-        <el-input type="text" v-model="GoodsForm.ma_nickname"  placeholder="输入新的用户名称" clearable >
+        <span>用户昵称：</span>
+        <el-input type="text" v-model="GoodsForm.ma_nickname"  placeholder="输入新的用户昵称" clearable >
         </el-input>
       </el-form-item>
       <el-form-item prop="ma_password">
@@ -140,7 +140,7 @@
     </el-form>
     <span class="img">上传用户头像</span>
     <el-upload
-      action="http://119.29.141.196:9000/img/upload"
+      action="http://localhost:3020/img/upload"
       list-type="picture-card"
       :on-preview="handlePictureCardPreview"
       :on-success="handleAvatarSuccess"

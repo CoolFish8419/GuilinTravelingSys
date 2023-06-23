@@ -2,7 +2,7 @@
     <div>
         <ul>
             <ul style="margin:10px 5px" v-for="comment in comments" :key="comment.id">
-                <strong>{{ comment.uid }}</strong>: {{ comment.content }}
+                <strong>{{ comment.username }}</strong>: {{ comment.content }}
             </ul>
         </ul>
 
@@ -24,7 +24,7 @@ export default {
             required: true
         },
 
-        uid: {
+        username: {
             type: String,
             required: true
         },
@@ -45,11 +45,11 @@ export default {
     },
     methods: {
         submitComment() {
-            if (this.commentText && this.uid) {
+            if (this.commentText && this.username) {
                 const newComment = {
                     type: this.type,
                     pid: this.id,
-                    uid: this.uid,
+                    username: this.username,
                     content: this.commentText
                 };
 

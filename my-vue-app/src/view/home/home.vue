@@ -127,8 +127,8 @@
        :preview="preview"
      />
         <div class="wenzi" :title="item.title">{{item.title}}</div>
-        <div class="information" :title="item.information">{{item.information}}</div>
-        <div class="price">{{item.price}}</div>
+        <div class="information" :title="item.score">评分：{{item.score}}</div>
+        <div class="information">热度：{{item.hot}}</div>
       </div>
       </div>
    </div>
@@ -151,7 +151,7 @@
        :preview="preview"
      />
         <div class="wenzi" :title="item.name">{{item.name}}</div>
-        <div class="hotel_information" :title="item.information">评价：{{item.assess}}</div>
+        <div class="hotel_information" :title="item.information">评价：{{item.score}}</div>
       </div>
       </div>
 
@@ -199,7 +199,7 @@
        :preview="preview"
      />
         <div class="wenzi" :title="item.name">{{item.name}}</div>
-        <div class="information" :title="item.address">{{item.address}}</div>
+        <div class="information" :title="item.recommend">推荐数：{{item.recommend}}</div>
       </div>
       </div>
    </div>
@@ -216,15 +216,14 @@
        width="210px"
        height="158px"
        fit="cover"
-       :src="item.imageo"
+       :src="item.image"
        style="margin:10px;"
        :title="item.time"
        :preview="preview"
      />
         <div class="wenzi" :title="item.title">{{item.title}}</div>
         <div class="information" :title="item.address">{{item.address}}</div>
-        <div class="like" :title="item.like">喜欢：{{item.like}}</div>
-        <div class="price" :title="item.look">观看：{{item.look}}</div>
+        <div class="like" :title="item.score">评分：{{item.score}}</div>
       </div>
       </div>
    </div>
@@ -303,7 +302,7 @@
   -webkit-box-orient:vertical;
   -webkit-line-clamp:2;
   width: 210px;
-  height: 40px;
+  height: 20px;
   line-height: 20px;
   margin:5px auto 5px;
   overflow: hidden;
@@ -313,7 +312,7 @@
  .price {
   width: 210px;
   height: 20px;
-  line-height: 20px;
+  line-height: 10px;
   margin:0 auto 10px;
  }
  .like {
