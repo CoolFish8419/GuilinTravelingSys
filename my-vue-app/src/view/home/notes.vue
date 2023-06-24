@@ -114,8 +114,8 @@
        />
        <div class="wenzi" :title="item.title">{{item.title}}</div>
        <div class="information" :title="item.address">{{item.address}}</div>
-       <div class="like" :title="item.like">喜欢：{{item.like}}</div>
-       <div class="price" :title="item.look">观看：{{item.look}}</div>
+       <div class="like" :title="item.score">评分：{{item.score}}</div>
+
      </div>
      </div>
    </div>

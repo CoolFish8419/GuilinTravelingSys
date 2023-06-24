@@ -120,7 +120,7 @@
    <div class="left">
     <el-avatar :size="size" :src="info.avatar" class="avatar_img" :shape="shape" @mouseenter="showAvatar" @mouseleave="closeAvatar" />
     <div>账号：{{info.username}}</div>
-    <div>用户名：{{info.nickname}}</div>
+    <div>用户昵称：{{info.nickname}}</div>
     <el-button type="primary" v-if="!openInfo" size="large" @click="open">修改个人信息</el-button>
     <el-button type="danger" size="large" @click="login_out">退出登录</el-button>
     <div></div>
@@ -128,8 +128,8 @@
    <div class="right" ref="right">
     <el-form ref="GoodsFormRef" :model="GoodsForm" :rules="GoodsFormRules" label-width="0px">
       <el-form-item prop="ma_nickname">
-        <span>用户名：</span>
-        <el-input type="text" v-model="GoodsForm.ma_nickname"  placeholder="输入新的用户名称" clearable >
+        <span>用户昵称：</span>
+        <el-input type="text" v-model="GoodsForm.ma_nickname"  placeholder="输入新的用户昵称" clearable >
         </el-input>
       </el-form-item>
       <el-form-item prop="ma_password">

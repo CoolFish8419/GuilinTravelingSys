@@ -10,14 +10,14 @@ export default {
       id: '',
       type: '',
       search: '',
-      uid: ''
+      username: ''
     }
   },
   created() {
     this.id = this.$route.query.id;
     this.type = this.$route.query.type;
     if (window.sessionStorage.getItem('info')) {
-      this.uid = JSON.parse(sessionStorage.getItem('info')).username
+      this.username = JSON.parse(sessionStorage.getItem('info')).username
     }
   },
   mounted() {
@@ -52,16 +52,15 @@ export default {
 
         <div class="right" v-if="type == 'attractions'">
           <div class="right_wenzi">地点：{{ item.title == undefined ? '暂无数据' : item.title }}</div>
-          <div class="right_wenzi">热度：{{ item.product == undefined ? '暂无数据' : item.product }}</div>
-          <div class="right_wenzi">区域：{{ item.area == undefined ? '暂无数据' : item.area }}</div>
-          <div class="right_wenzi">{{ item.address == undefined ? '暂无数据' : item.address }}</div>
-          <div class="right_wenzi">内容：{{ item.information == undefined ? '暂无数据' : item.information }}</div>
-          <div class="right_wenzi">价格：{{ item.price == undefined ? '暂无数据' : item.price }}</div>
-          <div class="right_wenzi">评论数：{{ item.amount == undefined ? '暂无数据' : item.amount + '条' }}</div>
+          <div class="right_wenzi">热度：{{ item.hot == undefined ? '暂无数据' : item.hot }}</div>
+          <div class="right_wenzi">区域：{{ item.address == undefined ? '暂无数据' : item.address }}</div>
+        
+          <div class="right_wenzi">评分：{{ item.score == undefined ? '暂无数据' : item.score }}</div>
         </div>
         <div class="right" v-else-if="type == 'hotel'">
-          <div class="right_wenzi">地址：{{ item.name == undefined ? '暂无数据' : item.name }}</div>
-          <div class="right_wenzi">评价：{{ item.assess == undefined ? '暂无数据' : item.assess }}</div>
+            <div class="right_wenzi">名称：{{ item.name == undefined ? '暂无数据' : item.name }}</div>
+          <div class="right_wenzi">地址：{{ item.address == undefined ? '暂无数据' : item.address }}</div>
+          <div class="right_wenzi">价格：{{ item.price== undefined ? '暂无数据' : item.price }}元</div>
           <div class="right_wenzi">评分：{{ item.score == undefined ? '暂无数据' : item.score }}</div>
         </div>
         <div class="right" v-else-if="type == 'restaurant'">
@@ -69,32 +68,27 @@ export default {
           <div class="right_wenzi">地址：{{ item.address == undefined ? '暂无数据' : item.address }}</div>
           <div class="right_wenzi">价格：{{ item.price == undefined ? '暂无数据' : item.price }}</div>
           <div class="right_wenzi">评分：{{ item.score == undefined ? '暂无数据' : item.score }}</div>
-          <div class="right_wenzi">评论数：{{ item.comment == undefined ? '暂无数据' : item.comment }}</div>
+
         </div>
         <div class="right" v-else-if="type == 'food'">
           <div class="right_wenzi">菜名：{{ item.name == undefined ? '暂无数据' : item.name }}</div>
-          <div class="right_wenzi">地址：{{ item.address == undefined ? '暂无数据' : item.address }}</div>
-          <div class="right_wenzi">{{ item.number == undefined ? '暂无数据' : item.number }}</div>
+          <div class="right_wenzi">推荐数：{{ item.recommend == undefined ? '暂无数据' : item.recommend}}</div>
+          <div class="right_info">详细信息:{{ item.information == undefined ? '暂无数据' : item.information }}</div>
         </div>
         <div class="right" v-else-if="type == 'notes'">
           <div class="right_wenzi">题目：{{ item.title == undefined ? '暂无数据' : item.title }}</div>
           <div class="right_wenzi">行程：{{ item.address == undefined ? '暂无数据' : item.address }}</div>
-          <div class="right_wenzi">开始时间：{{ item.time == undefined ? '暂无数据' : item.time }}</div>
-          <div class="right_wenzi">花费时间：{{ item.days == undefined ? '暂无数据' : item.days }}</div>
+          <div class="right_wenzi">出游日期：{{ item.time == undefined ? '暂无数据' : item.time }}</div>
           <div class="right_wenzi">记录：{{ item.quantity == undefined ? '暂无数据' : item.quantity }}</div>
-          <div class="right_wenzi">评论数：{{ item.comment == undefined ? '暂无数据' : item.comment }}</div>
-          <div class="right_wenzi">喜欢：{{ item.like == undefined ? '暂无数据' : item.like }}</div>
-          <div class="right_wenzi">观看：{{ item.look == undefined ? '暂无数据' : item.look }}</div>
-          <div class="right_wenzi">照片墙</div>
-          <a-image height="160px" :src="item.imageo" style="margin:10px;" :title="item.area" fit="fill" />
-          <a-image height="160px" :src="item.imaget" style="margin:10px;" :title="item.area" fit="fill" />
-          <a-image height="160px" :src="item.images" style="margin:10px;" :title="item.area" fit="fill" />
-          <a-image height="160px" :src="item.imagef" style="margin:10px;" :title="item.area" fit="fill" />
+          <div class="right_info">正文：{{ item.content == undefined ? '暂无数据' : item.content }}</div>
+
+          <div class="right_wenzi">精选照片</div>
+          <a-image height="160px" :src="item.image" style="margin:10px;" :title="item.area" fit="fill" />
         </div>
       </div>
       <div class="comments">
         <a>评论：</a>
-        <comments :uid="this.uid" :type="this.type" :id="this.id" />
+        <comments :username="this.username" :type="this.type" :id="this.id" />
       </div>
     </div>
   </div>
@@ -151,11 +145,20 @@ export default {
 
       .right_wenzi {
         height: 30px;
+        width: 550px;
         font-size: 18px;
         line-height: 30px;
         white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        overflow:visible;
+        text-overflow:ellipsis;
+      }
+      .right_info{
+        height: auto;
+        width: auto;
+        font-size: 18px;
+        line-height: 30px;
+        white-space:normal;
+        overflow:visible;
       }
     }
   }

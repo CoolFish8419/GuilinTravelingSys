@@ -109,7 +109,7 @@ export default{
    </el-form>
    <span class="img">商品图片</span>
    <el-upload
-     action="http://119.29.141.196:9000/img/upload"
+     action="http://localhost:3020/img/upload"
      list-type="picture-card"
      :on-preview="handlePictureCardPreview"
      :on-success="handleAvatarSuccess"
