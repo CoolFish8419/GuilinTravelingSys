@@ -7,7 +7,7 @@ import ArcoVue from '@arco-design/web-vue/es/arco-vue'
 import "@arco-design/web-vue/dist/arco.css"
 
 const app = createApp(App)
-axios.defaults.baseURL = 'http://localhost:3020'
+axios.defaults.baseURL = 'http://43.139.44.74:3020'
 app.config.globalProperties.$http = axios
 
 app.use(ArcoVue)
